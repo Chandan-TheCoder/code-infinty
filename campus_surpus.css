@@ -1,0 +1,498 @@
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  /* gray-900 */
+  --panel-2: #0b1220;
+  /* darker alt */
+  --text: #e5e7eb;
+  /* gray-200 */
+  --muted: #94a3b8;
+  /* slate-400 */
+  --brand: #22c55e;
+  /* green-500 */
+  --brand-2: #16a34a;
+  /* green-600 */
+  --warn: #f59e0b;
+  /* amber-500 */
+  --danger: #ef4444;
+  /* red-500 */
+  --ok: #10b981;
+  /* emerald-500 */
+  --card: #111827;
+  --border: #1f2937;
+  --chip: #0b1220;
+}
+
+
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(1200px 600px at 80% -10%, rgba(34, 197, 94, 0.15), rgba(15, 23, 42, 0)), var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  line-height: 1.5;
+}
+
+a {
+  color: #86efac;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Nav */
+header.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, .8);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 24px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+}
+
+.logo .badge {
+  background: var(--chip);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #a7f3d0;
+  border: 1px solid var(--border);
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .2s ease, transform .15s ease;
+}
+
+.tab-btn:hover {
+  transform: translateY(-1px);
+}
+
+.tab-btn[aria-selected="true"] {
+  background: #122232;
+  border-color: #1e293b;
+}
+
+/* Panels */
+main {
+  padding: 16px 24px 42px;
+}
+
+section.panel {
+  display: none;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #0e1626, #0a1221);
+  border-radius: 18px;
+  padding: 22px;
+  margin: 18px 0;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  animation: fadeIn .3s ease;
+}
+
+section.panel.active {
+  display: block;
+}
+
+/* Hero */
+.hero {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(34, 197, 94, .08), rgba(15, 23, 42, 0));
+  border-radius: 18px;
+  padding: 22px;
+  margin: 18px 0;
+}
+
+.inline-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Forms */
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  color: var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #2563eb22;
+  border-color: #2563eb66;
+}
+
+/* Buttons */
+button.primary {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  border: none;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: #00140a;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(34, 197, 94, .15);
+  transition: transform .15s ease;
+}
+
+button.primary:hover {
+  transform: translateY(-1px);
+}
+
+button.ghost {
+  background: #0b1220;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+button.ghost:hover {
+  background: #111c2f;
+}
+
+/* Chips, pills, tags */
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: var(--chip);
+  border: 1px solid var(--border);
+  color: #cbd5e1;
+  padding: 6px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #091120;
+  font-size: 12px;
+  color: #9fb3c6;
+}
+
+.tag-ok {
+  background: rgba(16, 185, 129, .15);
+  color: #a7f3d0;
+  border: 1px solid rgba(16, 185, 129, .3);
+}
+
+.tag-warn {
+  background: rgba(245, 158, 11, .15);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, .3);
+}
+
+.tag-expired {
+  background: rgba(239, 68, 68, .15);
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  color: #9fb3c6;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  background: #0e1626;
+}
+
+tr:hover td {
+  background: #0f1a2d;
+}
+
+/* KPI */
+.kpi {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.success {
+  color: var(--ok);
+}
+
+.warning {
+  color: var(--warn);
+}
+
+.danger {
+  color: var(--danger);
+}
+
+/* Switch */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch .track {
+  width: 46px;
+  height: 26px;
+  background: #0b1220;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  position: relative;
+}
+
+.switch .thumb {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #cbd5e1;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+  transition: all .2s ease;
+}
+
+.switch input:checked+.track .thumb {
+  left: 23px;
+  background: #86efac;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #07101c;
+  border: 1px solid #1f2937;
+  color: #e5e7eb;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .35);
+  display: none;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, .7);
+}
+
+.modal .dialog {
+  width: min(680px, 92vw);
+  background: #0b1220;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+/* Utility */
+.flex {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.searchbar input {
+  width: 280px;
+}
+
+.footer-note {
+  text-align: center;
+  color: #9fb3c6;
+  font-size: 12px;
+  margin-top: 24px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+body {
+  background-color: #0b0038;
+  /* light blue background */
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+
+/*...............................................*/
+/* Login overlay */
+.login-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
+  z-index: 50;
+}
+
+.login-card {
+  width: min(400px, 90%);
+  background: #111827;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, .5);
+  animation: fadeIn .4s ease;
+}
+
+.login-card h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.login-card p {
+  margin: 0 0 20px;
+}
+
+.login-card form {
+  display: grid;
+  gap: 14px;
+}
+
+.login-card input {
+  padding: 12px;
+  border-radius: 12px;
+  background: #0b1220;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.login-card button {
+  width: 100%;
+}

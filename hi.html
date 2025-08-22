@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Campus Surplus Food Platform</title>
+  <meta name="description" content="Track, redistribute, and responsibly manage surplus food across campus." />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="campus_surpus.css">
+
+</head>
+
+<body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCA7FDbEt974hjjEpnVhvfxn59zYPRfyek",
+      authDomain: "campus-surplus-food.firebaseapp.com",
+      projectId: "campus-surplus-food",
+      storageBucket: "campus-surplus-food.firebasestorage.app",
+      messagingSenderId: "620724925094",
+      appId: "1:620724925094:web:d68efc5f0f184b373a7a67",
+      measurementId: "G-GT1YQ0ZFSR"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+  <!-- NAV -->
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <h2>Campus Surplus Food</h2>
+      <p class="muted">Sign in to continue</p>
+      <form id="loginForm">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="you@campus.edu" required>
+
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" required>
+
+        <button type="submit" class="primary">Login</button>
+        <button type="button" class="ghost" id="guestBtn">Continue as Guest</button>
+      </form>
+    </div>
+  </div>
+
+  <header class="nav" role="navigation" aria-label="Main">
+    <div class="nav-inner">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M4 10h16M6 6h12M8 14h8M10 18h4" stroke="#86efac" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span>Campus Surplus Food</span>
+        <span class="badge">Prototype</span>
+      </div>
+      <!-- Tabs -->
+      <nav class="tabs right" role="tablist">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-list" id="tabbtn-list">List
+          Food</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-browse"
+          id="tabbtn-browse">Browse</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-notif"
+          id="tabbtn-notif">Notifications</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-safety"
+          id="tabbtn-safety">Safety</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-dash"
+          id="tabbtn-dash">Analytics</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-events"
+          id="tabbtn-events">Events</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-admin"
+          id="tabbtn-admin">Admin</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Smart, sustainable surplus-food redistribution</h1>
+      <p class="muted">List food in seconds, notify instantly, track impact, and keep food safe.</p>
+      <div class="inline-list">
+        <span class="pill">Auto-expiry</span>
+        <span class="pill">Pickup windows</span>
+        <span class="pill">Impact metrics</span>
+        <span class="pill">Event sync</span>
+      </div>
+    </section>
+
+    <!-- LIST PANEL -->
+    <section class="panel active" id="tab-list" role="tabpanel" aria-labelledby="tabbtn-list">
+      <div class="grid grid-2">
+        <div class="card">
+          <h2>List Surplus Food</h2>
+          <form id="listForm">
+            <div class="grid grid-2">
+              <div>
+                <label for="source">Source</label>
+                <select id="source" required>
+                  <option>Main Canteen</option>
+                  <option>Faculty Lounge</option>
+                  <option>Auditorium Pantry</option>
+                  <option>Sports Complex</option>
+                  <option>Guest House Kitchen</option>
+                </select>
+              </div>
+              <div>
+                <label for="item">Food Item</label>
+                <input id="item" placeholder="e.g., Veg Biryani" required />
+              </div>
+              <div>
+                <label for="quantity">Quantity</label>
+                <input id="quantity" placeholder="e.g., 50 plates / 5 kg" required />
+              </div>
+              <div>
+                <label for="location">Pickup Location</label>
+                <input id="location" placeholder="Block A rear gate" required />
+              </div>
+              <div>
+                <label for="safe">Safe (hrs)</label>
+                <select id="safe" required>
+                  <option>2</option>
+                  <option>3</option>
+                  <option selected>4</option>
+                  <option>6</option>
+                </select>
+              </div>
+              <div>
+                <label for="window">Pickup Window (hrs)</label>
+                <select id="window" required>
+                  <option>1</option>
+                  <option>2</option>
+                  <option selected>3</option>
+                  <option>4</option>
+                </select>
+              </div>
+              <div class="grid grid-2" style="grid-column:1/-1">
+                <div>
+                  <label for="pack">Packaging</label>
+                  <select id="pack">
+                    <option>Open trays</option>
+                    <option>Covered trays</option>
+                    <option>Sealed containers</option>
+                    <option>Individually packed</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="notes">Notes</label>
+                  <input id="notes" placeholder="Allergen info, spice level..." />
+                </div>
+              </div>
+            </div>
+            <div class="flex" style="margin-top:12px">
+              <button type="submit" class="primary">Publish</button>
+              <button type="reset" class="ghost">Reset</button>
+              <span class="muted">Auto-removes after safe window.</span>
+            </div>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Guidelines</h3>
+          <ul>
+            <li>Label veg/non-veg and allergens clearly.</li>
+            <li>Use sealed/covered containers where possible.</li>
+            <li>Discard spoiled food immediately.</li>
+          </ul>
+          <label class="switch" style="margin-top:12px">
+            <input type="checkbox" id="autoExpire" checked>
+            <span class="track"><span class="thumb"></span></span> Auto-expire listings
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- BROWSE -->
+    <section class="panel" id="tab-browse" role="tabpanel" aria-labelledby="tabbtn-browse">
+      <div class="flex">
+        <div class="searchbar"><input id="search" placeholder="Search listings..." /></div>
+        <div class="inline-list right">
+          <span class="pill">Filter
+            <select id="filterSafe">
+              <option value="all">All</option>
+              <option value="2">Safe 2h</option>
+              <option value="3">Safe 3h</option>
+              <option value="4">Safe 4h</option>
+              <option value="6">Safe 6h</option>
+            </select>
+          </span>
+          <span class="pill">Sort
+            <select id="sort">
+              <option value="endAsc">End ↑</option>
+              <option value="endDesc">End ↓</option>
+              <option value="qtyDesc">Quantity ↓</option>
+              <option value="qtyAsc">Quantity ↑</option>
+            </select>
+          </span>
+        </div>
+      </div>
+      <div class="card" style="margin-top:12px; overflow:auto; max-height:480px">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Source</th>
+              <th>Location</th>
+              <th>Safety</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="listingsBody"></tbody>
+        </table>
+      </div>
+      <div class="grid grid-2" style="margin-top:12px">
+        <div class="card">
+          <h3>Expiring Soon</h3>
+          <div id="expiryList" class="grid"></div>
+        </div>
+        <div class="card">
+          <h3>Details</h3>
+          <div id="detailBody" class="grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notifications -->
+    <section class="panel" id="tab-notif">
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Alerts</h3>
+          <div id="alerts" class="grid"></div>
+        </div>
+        <div class="card">
+          <h3>Preferences</h3>
+          <form id="notifForm" class="grid grid-2">
+            <div><label for="role">Role</label><select id="role">
+                <option>Student</option>
+                <option>NGO</option>
+                <option>Canteen</option>
+                <option>Hostel</option>
+              </select></div>
+            <div><label for="org">Organization</label><input id="org" /></div>
+            <div><label for="prefItem">Preferred Item</label><input id="prefItem" /></div>
+            <div><label for="radius">Radius (km)</label><select id="radius">
+                <option>1</option>
+                <option>2</option>
+                <option selected>3</option>
+                <option>5</option>
+              </select></div>
+            <div><label for="channels">Channels</label><select id="channels" multiple>
+                <option value="email">Email</option>
+                <option value="sms">SMS</option>
+                <option value="push">Push</option>
+              </select></div>
+            <div><label for="quiet">Quiet Hours</label><select id="quiet">
+                <option>None</option>
+                <option>22:00–07:00</option>
+              </select></div>
+            <div class="flex" style="grid-column:1/-1">
+              <label class="switch"><input type="checkbox" id="enablePush"><span class="track"><span
+                    class="thumb"></span></span> Push</label>
+              <button type="submit" class="primary right">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety -->
+    <section class="panel" id="tab-safety">
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Checklist</h3>
+          <ul>
+            <li>Hot food > 60°C</li>
+            <li>Cold food < 5°C</li>
+            <li>Gloves & utensils</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Auto-Expiry</h3>
+          <p class="muted">Expired rows removed automatically.</p>
+        </div>
+        <div class="card">
+          <h3>Audit Log</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Action</th>
+                <th>By</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="audit"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analytics -->
+    <section class="panel" id="tab-dash">
+      <div class="grid grid-3">
+        <div class="card stat-card">
+          <div>
+            <div class="muted">Total Saved</div>
+            <div id="kpiSavedKg" class="kpi">0.0 kg</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div>
+            <div class="muted">Meals Served</div>
+            <div id="kpiPeople" class="kpi">0</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div>
+            <div class="muted">CO₂e Avoided</div>
+            <div id="kpiCO2" class="kpi">0 kg</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-2" style="margin-top:12px">
+        <div class="card">
+          <h3>Weekly Impact</h3><canvas id="chartWeekly" height="140"></canvas>
+        </div>
+        <div class="card">
+          <h3>Impact by Source</h3><canvas id="chartSource" height="140"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events -->
+    <section class="panel" id="tab-events">
+      <button class="ghost" onclick="seedEvents()">Seed Events</button>
+      <div id="events" class="grid" style="margin-top:12px"></div>
+    </section>
+
+    <!-- Admin -->
+    <section class="panel" id="tab-admin">
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Users</h3><button class="ghost" onclick="seedUsers()">Seed Users</button>
+          <div id="users" class="grid"></div>
+        </div>
+        <div class="card">
+          <h3>Zones</h3>
+          <form id="zoneForm" class="grid"><input id="zoneName" placeholder="Zone Name" required><input id="zoneDesc"
+              placeholder="Description"><button class="primary">Add</button></form>
+          <div id="zones" class="grid"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="detailModal">
+    <div class="dialog">
+      <div class="flex" style="justify-content:space-between">
+        <h3>Listing Details</h3><button class="ghost" onclick="closeModal()">Close</button>
+      </div>
+      <div id="detailBody" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="campus_surplus_food_app.js"></script>
+</body>
+
+</html>
